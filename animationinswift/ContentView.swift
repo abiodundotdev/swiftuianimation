@@ -6,6 +6,8 @@ import SwiftUI
 
 struct ContentView: View {
     @State private var isEnabled = false
+    //@ClampedAge var age : Int
+    
     var body: some View {
         
         VStack {
@@ -15,7 +17,8 @@ struct ContentView: View {
             Text("Hello, world!")
             Button(isEnabled ?  "press me" : "Unpress me"){
                 isEnabled.toggle()
-            }.animation(.easeInOut(duration: 1))
+            }
+            //.animation(.easeInOut(duration: 1))
         }
         .padding()
     }
@@ -24,6 +27,16 @@ struct ContentView: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
+    }
+}
+
+
+@propertyWrapper
+struct ClampedAge{
+    private var number = 0
+    var wrappedValue : Int {
+        get{ number }
+        set { number = min(newValue, 12) }
     }
 }
 
